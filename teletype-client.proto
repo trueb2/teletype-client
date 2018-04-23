@@ -123,44 +123,39 @@ message NetworkMessage {
   string network_id = 1;
 
   oneof variant {
-    StarJoinRequest star_join_request = 2;
-    StarJoinResponse star_join_response = 3;
-    StarJoinNotification star_join_notification = 4;
-    StarLeaveNotification star_leave_notification = 5;
-    StarUnicast star_unicast = 6;
-    StarBroadcast star_broadcast = 7;
+    JoinRequest join_request = 2;
+    JoinResponse join_response = 3;
+    JoinNotification join_notification = 4;
+    LeaveNotification leave_notification = 5;
+    Unicast unicast = 6;
+    Broadcast broadcast = 7;
   }
 
-  message StarJoinRequest {
+  message JoinRequest {
     string sender_id = 1;
   }
 
-  message StarJoinResponse {
-    map<string, PeerIdentity> member_identities_by_id = 1;
+  message JoinResponse {
+    repeated string member_ids = 1;
   }
-
-  message StarJoinNotification {
+  
+  message JoinNotification {
     string member_id = 1;
-    PeerIdentity member_identity = 2;
   }
 
-  message StarLeaveNotification {
+  message LeaveNotification {
     string member_id = 1;
     bool connection_lost = 2;
   }
 
-  message StarUnicast {
+  message Unicast {
     string sender_id = 1;
     string recipient_id = 2;
     bytes body = 3;
   }
 
-  message StarBroadcast {
+  message Broadcast {
     string sender_id = 1;
     bytes body = 2;
   }
-}
-
-message PeerIdentity {
-  string login = 1;
 }
