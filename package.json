@@ -15,7 +15,8 @@
     "google-protobuf": "^3.5.0",
     "pusher-js": "^4.2.2",
     "uuid": "^3.2.1",
-    "webrtc-adapter": "^6.1.5"
+    "webrtc-adapter": "^6.1.5",
+    "sb-exec": "^4.0.0"
   },
   "devDependencies": {
     "@atom/teletype-server": "^0.18.1",
