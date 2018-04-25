@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+ import "teletype-client.proto";
+
+message DecMessage {
+    oneof variant {
+        UserIdRequest user_id_request = 1;
+        UserIdResponse user_id_response = 2;
+        ChannelPublishRequest channel_publish_request = 3;
+        ChannelSubscriptionRequest channel_subscription_request = 4;
+        ChannelSubscriptionResponse channel_subscription_response = 5;
+        ChannelLeaveRequest channel_leave_request = 6;
+        ChannelCloseRequest channel_close_request = 7;
+        ChannelCloseNotification channel_close_notification = 8;
+        Broadcast broadcast = 9;
+        Unicast unicast = 10;
+        Ping ping = 11;
+        Pong pong = 12;
+    }
+}
+
+message UserIdRequest {
+    uint32 query = 1;
+}
+
+message UserIdResponse {
+    string user_id = 1;
+}
+
+message ChannelPublishRequest {
+    string channel_id = 1;
+}
+
+message ChannelSubscriptionRequest {
+    string user_id = 1;
+    string channel_id = 2;
+}
+
+message ChannelSubscriptionResponse {
+    string host_id = 1;
+    repeated string peer_ids = 2;
+}
+
+message ChannelLeaveRequest {
+    string user_id = 1;
+    string channel_id = 2;
+}
+
+message ChannelCloseRequest {
+    string channel_id = 1;
+}
+
+message ChannelCloseNotification {
+    string user_id = 1;
+    string channel_id = 2;
+}
+
+message Broadcast {
+    string user_id = 1;
+    string channel_id = 2;
+    oneof variant {
+        PortalSubscriptionResponse portal_subscription_response = 3;
+        PortalUpdate portal_update = 4;
+        EditorProxy editor_proxy = 5;
+        EditorProxyMetadata editor_proxy_metadata = 6;
+        EditorProxyUpdate editor_proxy_update = 7;
+        BufferProxy buffer_proxy = 8;
+        BufferProxyUpdate buffer_proxy_update = 9;
+        Tether tether = 10;
+        RouterMessage router_message = 11;
+        NetworkMessage network_message = 12;
+    }
+}
+
+message Unicast {
+    string user_id = 1;
+    oneof variant {
+        PortalSubscriptionResponse portal_subscription_response = 2;
+        PortalUpdate portal_update = 3;
+        EditorProxy editor_proxy = 4;
+        EditorProxyMetadata editor_proxy_metadata = 5;
+        EditorProxyUpdate editor_proxy_update = 6;
+        BufferProxy buffer_proxy = 7;
+        BufferProxyUpdate buffer_proxy_update = 8;
+        Tether tether = 9;
+        RouterMessage router_message = 10;
+        NetworkMessage network_message = 11;
+    }
+}
+
+message Ping {
+    string user_id = 1;
+    uint32 ping = 2;
+}
+
+message Pong {
+    string user_id = 1;
+    uint32 pong = 2;
+}
+
+
+
+
+
+
+
